@@ -101,7 +101,7 @@ settled — by reading AdAway's and Intra's source — and §3.3 is rewritten ac
 
 | # | What you asked for | Requirement |
 |---|---|---|
-| 1 | "new project" | Fresh project in this repo at `projects/cleantube/` |
+| 1 | "new project" | A fresh project, in its own repository |
 | 2 | "mobile app" | Flutter, Android-first (v1), iOS deferred |
 | 3 | "ad blocker" | Ads blocked on the web, in our player, and (build-dependent) in other apps |
 | 4 | "mainly for youtube" | YouTube is the marquee feature, not a side case |
@@ -902,7 +902,7 @@ You asked for "your upgrade plans" — 24, ordered by value/effort.
 ## 8. Repo layout
 
 ```
-projects/cleantube/
+.
 ├── PLAN.md                  ← this document
 ├── README.md
 ├── app/                     ← Flutter app (android/, lib/, test/)

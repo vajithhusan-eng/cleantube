@@ -37,7 +37,7 @@ design doc. `STATE.md` is derived — regenerate it via the `project-orientation
 
 ## Scope
 
-**In:** fresh project at `projects/cleantube/`; Flutter, Android-first (iOS deferred
+**In:** Flutter, Android-first (iOS deferred
 to Tier-3 U15); ad blocking on the web, in our player, and build-dependently in other
 apps; YouTube as the marquee feature; blocking browser shell; Play Store as the
 distribution target; OTA rule kits.
@@ -127,10 +127,11 @@ implementation.
 
 ## Current state
 
-**Zero code.** `projects/cleantube/` contains only `PLAN.md` and an empty `docs/`.
-The four docs named in §8 (`architecture.md`, `store-policy-notes.md`,
+**Zero code.** The repository contains `PLAN.md` and the five document files
+(`README.md`, `AGENTS.md`, `STATE.md`, `CHANGELOG.md`, `docs/README.md`), and nothing
+else. The four docs named in §8 (`architecture.md`, `store-policy-notes.md`,
 `distribution-lanes.md`, `adblock-research.md`) do not exist. Nothing in git beyond
-the plan commit.
+the plan and those documents.
 
 ## Tech stack (§4)
 

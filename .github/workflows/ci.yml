@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  design-only:
+    name: design-only guard
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # This project has no code yet, and README.md says so. A green CI that
+      # meant nothing would be worse than this one: it fails the moment a
+      # source file appears, which is exactly when the plan and the repository
+      # stop agreeing and the reading needs a human.
+      - name: No source files until the plan says otherwise
+        run: |
+          set -euo pipefail
+          found=$(git ls-files | grep -E '\.(dart|kt|java|swift|py|ts|tsx|js|rs|go|cc|cpp)$' || true)
+          if [ -n "$found" ]; then
+            echo "::error::README.md declares this repository design-only, but source files exist:"
+            echo "$found"
+            echo
+            echo "Either the code is real and README.md/STATE.md must say so, or it was committed by mistake."
+            exit 1
+          fi
+          echo "No source files. The plan is the only artifact, as documented."
+
+      - name: Every plan file is indexed
+        run: |
+          set -euo pipefail
+          test -f PLAN.md
+          test -f docs/README.md
+          for f in *.md; do
+            case "$f" in
+              docs) continue ;;
+            esac
+            grep -q "$f" docs/README.md || {
+              echo "::error::$f is not named in docs/README.md — top-level docs must stay attached."
+              exit 1
+            }
+          done
+          echo "All top-level documents are indexed."
